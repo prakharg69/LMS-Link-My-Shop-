@@ -1,9 +1,10 @@
 import React from 'react'
-
-function login() {
+import { useParams } from 'react-router-dom'
+function Login() {
+    const {role} = useParams()
   return (
-    <div>login</div>
+    <div>{role}</div>
   )
 }
 
-export default login
+export default Login
