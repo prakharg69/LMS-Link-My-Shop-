@@ -1,0 +1,73 @@
+# =========================
+# NODE / NPM
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# ENVIRONMENT VARIABLES
+# =========================
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# =========================
+# BUILD OUTPUTS
+# =========================
+dist/
+build/
+out/
+
+# =========================
+# CACHE & TEMP
+# =========================
+.cache/
+.tmp/
+.temp/
+coverage/
+.eslintcache
+
+# =========================
+# LOG FILES
+# =========================
+logs/
+*.log
+
+# =========================
+# OS FILES
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / EDITOR
+# =========================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# =========================
+# DATABASE
+# =========================
+data/
+dump/
+*.sqlite
+*.sqlite3
+
+# =========================
+# UPLOADS (OPTIONAL)
+# =========================
+uploads/
+public/uploads/
+
+# =========================
+# TESTING
+# ==
