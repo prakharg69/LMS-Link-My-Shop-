@@ -13,14 +13,14 @@ export const signUpByGoogle = async (req, res) => {
     // ✅ SAFETY CHECK
     if (!idToken) {
       return res.status(400).json({
-        message: "ID token is required"
+        message: "ID token is required",
       });
     }
 
     // ✅ VERIFY GOOGLE ID TOKEN
     const ticket = await client.verifyIdToken({
       idToken,
-      audience: process.env.GOOGLE_CLIENT_ID
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
 
     const {
@@ -28,7 +28,7 @@ export const signUpByGoogle = async (req, res) => {
       email,
       name,
       picture,
-      email_verified
+      email_verified,
     } = ticket.getPayload();
 
     let user = await User.findOne({ email });
@@ -42,26 +42,24 @@ export const signUpByGoogle = async (req, res) => {
         emailVerified: email_verified,
         role,
         authProvider: "google",
-        lastLoginAt: new Date()
+        lastLoginAt: new Date(),
       });
     } else {
       user.lastLoginAt = new Date();
       await user.save();
     }
 
-   
     const token = jwt.sign(
       { userId: user._id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
-    
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
-      maxAge: 7 * 24 * 60 * 60 * 1000
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(200).json({
@@ -72,15 +70,75 @@ export const signUpByGoogle = async (req, res) => {
         email: user.email,
         role: user.role,
         profileImage: user.profileImage,
-        isOnboarded: user.isOnboarded
-      }
+        isOnboarded: user.isOnboarded,
+      },
+    });
+  } catch (error) {
+    console.error("Google Auth Error:", error);
+    res.status(401).json({
+      message: "Google authentication failed",
+    });
+  }
+};
+
+export const loginByGoogle = async (req, res) => {
+  try {
+    const { idToken } = req.body;
+
+    if (!idToken) {
+      return res.status(400).json({ message: "ID token is required" });
+    }
+
+    const ticket = await client.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const { email, email_verified } = ticket.getPayload();
+
+    if (!email_verified) {
+      return res.status(401).json({ message: "Email not verified by Google" });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "User not registered" });
+    }
+
+    // ✅ update last login
+    user.lastLoginAt = new Date();
+    await user.save();
+
+    const token = jwt.sign(
+      { userId: user._id, role: user.role }, // role from DB
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "User logged in successfully",
+      user: {
+        id: user._id,
+        name: user.username,
+        email: user.email,
+        role: user.role,
+        profileImage: user.profileImage,
+        isOnboarded: user.isOnboarded,
+      },
     });
 
   } catch (error) {
     console.error("Google Auth Error:", error);
     res.status(401).json({
-      message: "Google authentication failed"
+      message: "Google authentication failed",
     });
   }
 };
-

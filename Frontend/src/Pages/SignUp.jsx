@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 function SignUp() {
   const navigate = useNavigate();
-  const { role = "user" } = useParams();
+  const { role = "owner" } = useParams();
 
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
@@ -55,7 +55,7 @@ function SignUp() {
         <p className="text-sm text-gray-600">
           Already have an account?{" "}
           <span
-            onClick={() => navigate(`/login/${role}`)}
+            onClick={() => navigate(`/login`)}
             className="text-blue-600 font-medium cursor-pointer hover:underline"
           >
             Login
