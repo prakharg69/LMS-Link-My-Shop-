@@ -11,13 +11,16 @@ import QR from "../Pages/QR";
 import Stats from "../Pages/Stats";
 import Campaigns from "../Pages/Campaigns";
 import Settings from "../Pages/Settings";
-
+import { useAuth } from "../Redux/hook";
+import { useFetchUser } from "../Hooks/getUser";
 function Dashboard() {
+  const {user} = useAuth()
   const { activeTab } = useGlobalState();
+  useFetchUser();
   useEffect(()=>{
-    console.log("data:",activeTab);
-    
-  },[activeTab]);
+      console.log("userDaTA is :",user);
+      
+  },[user])
 
   const renderContent = () => {
     switch (activeTab) {
@@ -60,7 +63,7 @@ function Dashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="w-10/12 bg-white rounded-2xl overflow-y-auto p-4">
+        <div className="w-10/12 bg-white rounded-2xl overflow-y-auto ">
           {renderContent()}
         </div>
       </div>

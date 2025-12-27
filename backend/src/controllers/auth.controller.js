@@ -54,6 +54,7 @@ export const signUpByGoogle = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
+      
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -61,6 +62,7 @@ export const signUpByGoogle = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+    
 
     res.status(200).json({
       success: true,
@@ -114,6 +116,9 @@ export const loginByGoogle = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
+    
+    
+    
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -121,6 +126,8 @@ export const loginByGoogle = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+      
+    
 
     res.status(200).json({
       success: true,
