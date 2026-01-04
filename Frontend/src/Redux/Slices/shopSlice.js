@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  shop: null,
-  hasWebsite: false,   
-  isOnboarded: false,   
+  shop: [],
+  isOnboarded: false,
   loading: false
 };
 
@@ -12,12 +11,11 @@ const shopSlice = createSlice({
   initialState,
   reducers: {
     setShop(state, action) {
-      state.shop = action.payload;
-      state.hasWebsite = action.payload?.hasWebsite || false;
-      state.isOnboarded = true;
+      state.shop= action.payload;
+      state.isOnboarded = state.shop.length > 0;
     },
     setShopLoading(state, action) {
-      state.loading = action.payload; 
+      state.loading = action.payload;
     }
   }
 });

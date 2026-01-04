@@ -8,45 +8,45 @@ const shopSchema = new mongoose.Schema(
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
     // ==================================================
     // 2️⃣ t (SYSTEM LEVEL)
     // ==================================================
 
-    // Human-friendly shop identifier (easy search & support)
+    
     shopCode: {
       type: String,
       unique: true,
-      index: true
+      index: true,
       // e.g. SHOP-1023
     },
-
+    
     shopName: {
-      type: String
+      type: String,
     },
 
     shopType: {
-      type: String // kirana, medical, hardware, mobile, stationery
+      type: String, // kirana, medical, hardware, mobile, stationery
     },
 
     businessCategory: {
-      type: String // retail, wholesale, both
+      type: String, // retail, wholesale, both
     },
 
     // ==================================================
     // 3️⃣ CONTACT (SYSTEM USE)
     // ==================================================
     primaryPhone: {
-      type: String
+      type: String,
     },
 
     primaryWhatsapp: {
-      type: String
+      type: String,
     },
 
     businessEmail: {
-      type: String
+      type: String,
     },
 
     // ==================================================
@@ -56,7 +56,7 @@ const shopSchema = new mongoose.Schema(
       addressLine: String,
       city: String,
       state: String,
-      pincode: String
+      pincode: String,
     },
 
     // ==================================================
@@ -64,21 +64,16 @@ const shopSchema = new mongoose.Schema(
     // ==================================================
     hasWebsite: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     websiteUrl: {
-      type: String
-    },
-
-    shopSlug: {
       type: String,
-      unique: true
     },
 
     digitalPageId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "DigitalShopPage"
+      ref: "DigitalShopPage",
     },
 
     // ==================================================
@@ -87,18 +82,18 @@ const shopSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["draft", "active", "suspended"],
-      default: "draft"
+      default: "draft",
     },
 
     // ✅ Controls setup completion
     isOnboarded: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     isVerified: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     // ==================================================
@@ -107,15 +102,14 @@ const shopSchema = new mongoose.Schema(
     stats: {
       totalLinks: {
         type: Number,
-        default: 0
+        default: 0,
       },
       totalClicks: {
         type: Number,
-        default: 0
+        default: 0,
       },
-      lastActivityAt: Date
+      lastActivityAt: Date,
     },
-
   },
   { timestamps: true }
 );

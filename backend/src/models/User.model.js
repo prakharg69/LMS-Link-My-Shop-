@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
 
     password: {
       type: String,
-      default: null // will be set later from profile
+      default: null 
     },
 
    authProvider: {

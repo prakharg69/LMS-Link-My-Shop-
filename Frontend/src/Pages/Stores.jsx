@@ -16,6 +16,9 @@ function Stores() {
         </div>
         
         <div>
+
+
+          
         </div>
         {show && <CreateStoreForm onClose={CreateStoreHandle} />}
     </div>

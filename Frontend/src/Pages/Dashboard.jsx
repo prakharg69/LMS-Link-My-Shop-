@@ -13,10 +13,13 @@ import Campaigns from "../Pages/Campaigns";
 import Settings from "../Pages/Settings";
 import { useAuth } from "../Redux/hook";
 import { useFetchUser } from "../Hooks/getUser";
+import { useGetShop } from "../Hooks/getShop";
 function Dashboard() {
   const {user} = useAuth()
   const { activeTab } = useGlobalState();
   useFetchUser();
+  useGetShop();
+  
   useEffect(()=>{
       console.log("userDaTA is :",user);
       
