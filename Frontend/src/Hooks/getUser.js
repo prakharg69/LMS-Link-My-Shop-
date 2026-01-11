@@ -18,6 +18,8 @@ export const useFetchUser = () => {
         );
 
         dispatch(setUser(res.data.user));
+        
+        
       } catch (error) {
         dispatch(setLoading(false));
         console.error("Failed to fetch user", error);

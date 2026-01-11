@@ -11,6 +11,9 @@ import {
   AlertCircle,
 } from "lucide-react";
 import axios from "axios";
+import { useGetShop } from "../Hooks/getShop";
+import { useDispatch } from "react-redux";
+import { setShopPush } from "../Redux/Slices/shopSlice";
 
 const SHOP_TYPES = [
   "Kirana / Grocery",
@@ -46,6 +49,7 @@ function CreateStoreForm({ onClose }) {
     hasWebsite: false,
     websiteUrl: "",
   });
+  const dispatch = useDispatch();
 
   // Close dropdowns when clicking outside
   // useEffect(() => {
@@ -62,7 +66,7 @@ function CreateStoreForm({ onClose }) {
 
   const validateStep = () => {
     const newErrors = {};
-
+    
     if (step === 1) {
       if (!formData.shopName.trim()) {
         newErrors.shopName = "Shop name is required";
@@ -185,6 +189,7 @@ function CreateStoreForm({ onClose }) {
         { withCredentials: true }
       );
       console.log("Store created successfully:", res.data);
+          dispatch(setShopPush(res.data.store));
       onClose(); 
     } catch (error) {
       console.error("Error creating store:", error);

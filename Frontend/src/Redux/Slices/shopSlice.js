@@ -13,12 +13,16 @@ const shopSlice = createSlice({
     setShop(state, action) {
       state.shop= action.payload;
       state.isOnboarded = state.shop.length > 0;
+      state.loading
     },
     setShopLoading(state, action) {
       state.loading = action.payload;
+    },
+    setShopPush(state,action){
+      state.shop.push(action.payload);
     }
   }
 });
 
-export const { setShop, setShopLoading } = shopSlice.actions;
+export const { setShop, setShopLoading,setShopPush } = shopSlice.actions;
 export default shopSlice.reducer;

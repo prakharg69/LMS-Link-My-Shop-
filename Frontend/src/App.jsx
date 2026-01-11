@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import Login from "./Pages/login";
 import SignUp from "./Pages/SignUp";
 import Dashboard from "./Pages/Dashboard";
+import StoreEdit from "./Pages/StoreEdit";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signUp/:role" element={<SignUp/>}/>
        <Route path="/dashboard" element={<Dashboard/>}/>
+       <Route path="/Store-Edit/:shopId" element={<StoreEdit></StoreEdit>}></Route>
     </Routes>
   );
 }

@@ -14,14 +14,13 @@ const shopSchema = new mongoose.Schema(
     // 2️⃣ t (SYSTEM LEVEL)
     // ==================================================
 
-    
     shopCode: {
       type: String,
       unique: true,
       index: true,
       // e.g. SHOP-1023
     },
-    
+
     shopName: {
       type: String,
     },
@@ -110,7 +109,27 @@ const shopSchema = new mongoose.Schema(
       },
       lastActivityAt: Date,
     },
+    otp: {
+      code: {
+        type: String,
+      },
+      expiresAt: {
+        type: Date,
+      },
+      purpose: {
+        type: String,
+        enum: ["verify-phone", "verify-email", "verify-shop"],
+      },
+      attempts: {
+        type: Number,
+        default: 0,
+      },
+      lastSentAt: {
+        type: Date,
+      },
+    },
   },
+
   { timestamps: true }
 );
 
