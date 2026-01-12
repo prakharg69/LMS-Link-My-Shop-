@@ -5,7 +5,7 @@ function ListingCard({ listing }) {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
       {/* Banner */}
-      <div className="h-32 bg-gradient-to-r from-purple-500 to-pink-500 relative">
+      <div className="h-32 bg-linear-to-r from-purple-500 to-pink-500 relative">
         {listing.isPublic ? (
           <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1 text-xs font-medium text-green-700">
             <Globe className="w-3 h-3" />

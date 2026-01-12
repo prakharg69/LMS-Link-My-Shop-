@@ -11,6 +11,7 @@ import ShopSelectDropdown from "./ShopSelectDropdown";
 import ClassicDigitalPage from "../Pages/ClassicDigitalPage";
 import ModernDigitalPage from "../Pages/ModernDigitalPage";
 import MinimalDigitalPage from "../Pages/MinimalDigitalPage";
+import axios from "axios";
 
 function CreateListingForm({ shops, onClose }) {
   const [formData, setFormData] = useState({
@@ -133,12 +134,51 @@ function CreateListingForm({ shops, onClose }) {
       }));
     }
   }, [selectedShop]);
-    const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Form data:", formData);
-    
-    
-  };
+   const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const data = new FormData();
+
+    // BASIC FIELDS
+    data.append("shopId", formData.shopId);
+    data.append("title", formData.title);
+    data.append("tagline", formData.tagline);
+    data.append("description", formData.description);
+    data.append("theme", formData.theme);
+    data.append("layout", formData.layout);
+    data.append("primaryColor", formData.primaryColor);
+    data.append("status", formData.status);
+
+    // BOOLEAN (convert to string)
+    data.append("deliveryAvailable", String(formData.deliveryAvailable));
+    data.append("homeServiceAvailable", String(formData.homeServiceAvailable));
+
+    // OBJECTS / ARRAYS
+    data.append("contact", JSON.stringify(formData.contact));
+    data.append("address", JSON.stringify(formData.address));
+    data.append("socialLinks", JSON.stringify(formData.socialLinks));
+    data.append("timings", JSON.stringify(formData.timings));
+    data.append("services", JSON.stringify(formData.services));
+    data.append("facilities", JSON.stringify(formData.facilities));
+    data.append("paymentMethods", JSON.stringify(formData.paymentMethods));
+
+    // FILES
+    if (formData.logo) data.append("logo", formData.logo);
+    if (formData.bannerImage) data.append("bannerImage", formData.bannerImage);
+
+    const res = await axios.post(
+      "http://localhost:5002/api/create-digital",
+      data,
+      { withCredentials: true }
+    );
+
+    console.log("SUCCESS:", res.data);
+  } catch (error) {
+    console.error("ERROR:", error.response?.data || error.message);
+  }
+};
+
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -941,25 +981,9 @@ function CreateListingForm({ shops, onClose }) {
                 </select>
               </div>
 
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-900">
-                  Layout
-                </label>
-                <select
-                  name="layout"
-                  value={formData.layout}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-                >
-                  {layoutOptions.map((layout) => (
-                    <option key={layout} value={layout}>
-                      {layout.charAt(0).toUpperCase() + layout.slice(1)}
-                    </option>
-                  ))}
-                </select>
-              </div>
+             
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className="block text-sm font-medium text-gray-900">
                   Font Family
                 </label>

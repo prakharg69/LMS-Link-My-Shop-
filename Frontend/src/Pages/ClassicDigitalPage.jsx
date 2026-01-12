@@ -57,9 +57,15 @@ const ClassicDigitalPage = ({ pageData }) => {
     homeServiceAvailable: true,
     services: [
       "Online food ordering from multiple restaurants",
-      "Fast and reliable home delivery"
+      "Fast and reliable home delivery",
+      "Clean and hygienic food preparation environment",
+      "Secure and easy online payment system",
     ],
-    facilities: [] // Empty array test
+    facilities: ["Clean and hygienic food preparation environment",
+      "Secure and easy online payment system",
+      "User-friendly website for smooth ordering",
+      "Real-time order tracking facility",
+      "Customer support for quick assistance"] // Empty array test
   };
 
   // --- Color Palette Logic ---
@@ -272,7 +278,7 @@ const ClassicDigitalPage = ({ pageData }) => {
                 Telephone
               </div>
               <div className="flex items-center gap-3" style={{ color: theme.text }}>
-                <Phone size={18} className="flex-shrink-0" style={{ color: data.primaryColor }}/>
+                <Phone size={18} className="shrink-0" style={{ color: data.primaryColor }}/>
                 <a href={`tel:${data.contact.phone}`} className="font-bold">
                   {data.contact.phone}
                 </a>
@@ -287,7 +293,7 @@ const ClassicDigitalPage = ({ pageData }) => {
                 Email
               </div>
               <div className="flex items-center gap-3" style={{ color: theme.text }}>
-                <Mail size={18} className="flex-shrink-0" style={{ color: data.primaryColor }}/>
+                <Mail size={18} className="shrink-0" style={{ color: data.primaryColor }}/>
                 <a href={`mailto:${data.contact.email}`} className="font-bold truncate">
                   {data.contact.email}
                 </a>
@@ -310,7 +316,7 @@ const ClassicDigitalPage = ({ pageData }) => {
                 {data.services.map((service, idx) => (
                   <li key={idx} className="relative pb-2" style={{ color: theme.text }}>
                     <span 
-                      className="absolute -left-[31px] top-1.5 w-2 h-2 rounded-full border"
+                      className="absolute -left-7.75 top-1.5 w-2 h-2 rounded-full border"
                       style={{ borderColor: theme.border, backgroundColor: data.primaryColor }}
                     ></span>
                     {service}

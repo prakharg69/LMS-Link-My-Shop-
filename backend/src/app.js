@@ -5,6 +5,7 @@ import AuthRouter from "./routes/auth.route.js";
 import UserRouter from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
 import storeRoute from "./routes/store.route.js";
+import DigitalPageRouter from "./routes/digitalPage.route.js";
 dotenv.config();
 
 const app = express();
@@ -32,5 +33,6 @@ app.get("/", (req, res) => {
 app.use("/api", AuthRouter);
 app.use("/api",UserRouter);
 app.use("/api",storeRoute);
+app.use("/api",DigitalPageRouter);
 
 export default app;
