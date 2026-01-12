@@ -127,6 +127,7 @@ const digitalShopPageSchema = new mongoose.Schema(
     theme: {
       type: String,
       default: "default",
+      enum:["modern","clasic","minimal"]
     },
 
     primaryColor: {

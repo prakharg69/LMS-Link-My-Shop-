@@ -10,6 +10,8 @@ export const GlobalContextProvider = ({ children }) => {
     setActiveTab
   };
 
+  
+
   return (
     <GlobalContext.Provider value={value}>
       {children}
